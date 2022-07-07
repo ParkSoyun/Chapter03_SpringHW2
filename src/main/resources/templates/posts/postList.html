@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <link th:href="@{/css/post-list-style.css}" rel="stylesheet" type="text/css">
+<!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
+
+    <title>HangHae.Log</title>
+</head>
+
+<body>
+    <div class="background-body"></div>
+
+    <div th:include="posts/mainHeader.html"></div>
+
+    <div class="wrap">
+        <div class="new-post-btn">
+            <button type="button" class="btn btn-outline-info" th:onclick="|location.href='@{/posts/write}'|">+ New Post</button>
+        </div>
+
+        <table class="table table-hover post-list">
+            <thead>
+                <tr>
+                    <th class="post-id" scope="col"></th>
+                    <th scope="col"></th>
+                    <th class="post-writer-th" scope="col"></th>
+                    <th class="post-create-date-th" scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.postId}" scope="row"></td>
+                    <th class="post-title">
+                        <a th:text="${post.title}" th:href="@{/posts/{id}(id=${post.PostId})}"></a>
+                    </th>
+                    <td class="post-writer-tb" th:text="${post.writer}"></td>
+                    <td class="post-create-date-tb" th:text="${post.createdAt}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
