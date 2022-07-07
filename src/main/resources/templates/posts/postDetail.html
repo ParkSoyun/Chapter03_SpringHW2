@@ -17,6 +17,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
     <title>HangHae.Log</title>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            let result = [[${result}]];
+
+            if(result != null) {
+                alert(result);
+
+                location.href= "[[${post.postId}]]";
+            }
+        });
+    </script>
 </head>
 <body>
     <div class="background-body"></div>
@@ -34,7 +46,13 @@
             </div>
 
             <div>
-                <label th:text="${post.createdAt}"></label>
+                <div class="col row created-at">
+                    <label for="inputCreatedAt" class="col col-4 col-form-label">작성 시간</label>
+                    <div class="col">
+                        <input disabled type="text" name="createdAt" class="form-control" id="inputCreatedAt" th:value="${post.createdAt}">
+                    </div>
+                </div>
+
                 <input readonly class="form-control form-control-lg" type="text" name="title" th:value="${post.title}">
 
                 <div class="writer-password">
@@ -47,7 +65,7 @@
                     <div class="col row password">
                         <label for="inputPassword" class="col col-3 col-form-label">비밀번호</label>
                         <div class="col">
-                            <input readonly type="password" name="password" class="form-control" id="inputPassword">
+                            <input readonly type="password" name="password" class="form-control" id="inputPassword" required>
                         </div>
                     </div>
                 </div>
