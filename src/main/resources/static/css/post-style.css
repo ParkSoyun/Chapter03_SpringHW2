@@ -5,7 +5,6 @@
     top: 150px;
     height: 100%;
     width: 100%;
-    /*background-color: #dee2e6;*/
     background-color: #dee5f6;
 
 
@@ -22,6 +21,12 @@
     margin-bottom: 10px;
 }
 
+.created-at {
+    float: left;
+
+    padding-top: 10px;
+}
+
 .writer-password {
     display: flex;
     flex-direction: row;
@@ -32,11 +37,11 @@
 }
 
 .writer {
-    margin-right: 10px;
+    padding-right: 10px;
 }
 
 .password {
-    margin-left: 10px;
+    padding-left: 10px;
 }
 
 .content {
