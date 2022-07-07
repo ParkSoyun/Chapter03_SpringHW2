@@ -30,25 +30,25 @@
             </div>
 
             <div>
-                <input class="form-control form-control-lg" type="text" name="title" placeholder="제목을 입력해주세요." aria-label="제목">
+                <input class="form-control form-control-lg" type="text" name="title" placeholder="제목을 입력해주세요." aria-label="제목" required>
 
                 <div class="writer-password">
                     <div class="col writer row">
                         <label for="inputWriter" class="col col-md-3 col-form-label">작성자</label>
                         <div class="col">
-                            <input type="text" class="form-control" name="writer" id="inputWriter" placeholder="작성자명을 입력해주세요.">
+                            <input type="text" class="form-control" name="writer" id="inputWriter" placeholder="작성자명을 입력해주세요." required>
                         </div>
                     </div>
                     <div class="col password row">
                         <label for="inputPassword" class="col col-3 col-form-label">비밀번호</label>
                         <div class="col">
-                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="비밀번호를 입력해주세요.">
+                            <input type="password" class="form-control" name="password" id="inputPassword" placeholder="비밀번호를 입력해주세요." required>
                         </div>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <textarea class="form-control content" name="content" id="exampleFormControlTextarea1" placeholder="내용을 입력해주세요." rows="10"></textarea>
+                    <textarea class="form-control content" name="content" id="exampleFormControlTextarea1" placeholder="내용을 입력해주세요." rows="10" required></textarea>
                 </div>
             </div>
         </form>
