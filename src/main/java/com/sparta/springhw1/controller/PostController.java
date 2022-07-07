@@ -4,6 +4,7 @@ import com.sparta.springhw1.domain.Post;
 import com.sparta.springhw1.dto.RequestPostDto;
 import com.sparta.springhw1.dto.UpdateRequestPostDto;
 import com.sparta.springhw1.service.PostService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,11 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/posts";
+    }
 
     @GetMapping("/posts")
     public String postList(Model model) {
