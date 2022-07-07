@@ -6,13 +6,12 @@
     height: 100%;
     width: 100%;
     background-color: #dee5f6;
-
-
 }
 
 .wrap {
     width: 700px;
-    margin: 10px auto;
+    margin: 0px auto;
+    padding-top: 200px;
 }
 
 .save-post-btn {

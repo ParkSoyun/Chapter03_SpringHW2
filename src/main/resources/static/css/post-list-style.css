@@ -12,7 +12,8 @@
 
 .wrap {
     width: 700px;
-    margin: 250px auto;
+    margin: 0px auto;
+    padding-top: 250px;
 }
 
 .new-post-btn {
