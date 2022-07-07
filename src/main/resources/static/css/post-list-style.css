@@ -1,0 +1,66 @@
+* {
+    font-family: 'Gowun Dodum', sans-serif;
+}
+
+.background-body {
+    position: fixed;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    /*background-color: #dee2e6;*/
+    background-color: #dee5f6;
+}
+
+.wrap {
+    width: 700px;
+    margin: 250px auto;
+}
+
+.new-post-btn {
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.post-list {
+    table-layout: fixed;
+}
+
+.post-id {
+    width: 10%;
+}
+
+.post-title {
+    width: 45%;
+
+    margin-left: 5px;
+    margin-right: 5px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.post-writer-th {
+    width: 17%;
+}
+
+.post-create-date-th {
+    width: 28%;
+}
+
+.post-writer-tb {
+    width: 17%;
+
+    text-align: right;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.post-create-date-tb {
+    width: 23%;
+
+    text-align: right;
+}

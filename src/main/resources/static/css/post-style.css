@@ -1,0 +1,46 @@
+
+.background-body {
+    position: fixed;
+    z-index: -1;
+    top: 150px;
+    height: 100%;
+    width: 100%;
+    /*background-color: #dee2e6;*/
+    background-color: #dee5f6;
+
+
+}
+
+.wrap {
+    width: 700px;
+    margin: 10px auto;
+}
+
+.save-post-btn {
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.writer-password {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+
+    margin-top: 10px;
+}
+
+.writer {
+    margin-right: 10px;
+}
+
+.password {
+    margin-left: 10px;
+}
+
+.content {
+    margin-top: 10px;
+
+    resize: none;
+}
