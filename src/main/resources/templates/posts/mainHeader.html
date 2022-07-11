@@ -22,7 +22,10 @@
     <div class="main-header">
         <div class="background-main-header"></div>
         <div class="main-header ">
-            <h1 th:onclick="|location.href='@{/posts}'|">HangHae.Log</h1>
+            <a th:href="@{/posts}">
+<!--                <h1 th:onclick="|location.href='@{/posts}'|">HangHae.Log</h1>-->
+                    <h1>HangHae.Log</h1>
+            </a>
             <h5>
                 나만의 항해 블로그
             </h5>
