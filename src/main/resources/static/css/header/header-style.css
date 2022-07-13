@@ -17,9 +17,24 @@
 
 .main-header {
     position: fixed;
-    top: 100px;
+    /*top: 100px;*/
+    top: 60px;
     width: 100%;
     height: 150px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+
+.user-box {
+    display: block;
+    /*position: fixed;*/
+    /*top: 80px;*/
+    width: fit-content;
+
+    margin: 0 auto;
 }
 
 .main-header a {
@@ -39,7 +54,7 @@
 }
 
 .main-header h5 {
-    margin: 40px auto;
+    margin: 20px auto 50px;
     width: 217px;
     height: 48px;
     text-align: center;
