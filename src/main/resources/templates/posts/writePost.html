@@ -11,7 +11,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <link th:href="@{/css/post-style.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/posts/post-style.css}" rel="stylesheet" type="text/css">
     <!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <body>
     <div class="background-body"></div>
 
-    <div th:include="posts/subHeader.html"></div>
+    <div th:include="header/subHeader.html"></div>
 
     <div class="wrap">
         <form action="/posts/write" method="post" accept-charset="UTF-8">

@@ -15,7 +15,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <link th:href="@{/css/post-list-style.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/posts/post-list-style.css}" rel="stylesheet" type="text/css">
 <!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
@@ -25,7 +25,7 @@
 <body>
     <div class="background-body"></div>
 
-    <div th:include="posts/mainHeader.html"></div>
+    <div th:include="header/mainHeader.html"></div>
 
     <div class="wrap">
         <div class="new-post-btn">
@@ -45,7 +45,7 @@
                 <tr th:each="post : ${posts}">
                     <td th:text="${post.postId}" scope="row"></td>
                     <th class="post-title">
-                        <a th:text="${post.title}" th:href="@{/posts/{id}(id=${post.PostId})}"></a>
+                        <a th:text="${post.title}" th:href="@{/posts/{id}(id=${post.postId})}"></a>
                     </th>
                     <td class="post-writer-tb" th:text="${post.writer}"></td>
                     <td class="post-create-date-tb" th:text="${post.createdAt}"></td>

@@ -1,8 +1,8 @@
 package com.sparta.springhw1.service;
 
 import com.sparta.springhw1.domain.Post;
-import com.sparta.springhw1.dto.RequestPostDto;
-import com.sparta.springhw1.dto.UpdateRequestPostDto;
+import com.sparta.springhw1.dto.InsertPostRequestDto;
+import com.sparta.springhw1.dto.UpdatePostRequestDto;
 import com.sparta.springhw1.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,6 @@ import java.util.List;
 @Transactional
 @Service
 public class PostService {
-
     private final PostRepository postRepository;
 
     public List<Post> getPostList() {
@@ -29,8 +28,8 @@ public class PostService {
         return post;
     }
 
-    public Long savePost(RequestPostDto postInsertDto) {
-        Post post = new Post(postInsertDto);
+    public Long savePost(InsertPostRequestDto insertPostRequestDto) {
+        Post post = new Post(insertPostRequestDto);
 
         postRepository.saveAndFlush(post);
 
@@ -47,7 +46,7 @@ public class PostService {
         }
     }
 
-    public void modifyPost(Long id, UpdateRequestPostDto updateRequestPostDto) {
+    public void modifyPost(Long id, UpdatePostRequestDto updateRequestPostDto) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
 
         post.update(updateRequestPostDto);

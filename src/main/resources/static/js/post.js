@@ -1,3 +1,6 @@
+
+    autosize(document.getElementById('exampleFormControlTextarea1'));
+
 function openPasswordFormModify() {
     $('#inputPassword').attr("readonly", false);
     $('#buttonModify').attr("hidden", true);
@@ -13,7 +16,6 @@ function openPasswordFormDelete() {
 }
 
 function checkPasswordAndDelete(id) {
-    let type = "delete";
     let password = $('#inputPassword').val();
 
     $.ajax({

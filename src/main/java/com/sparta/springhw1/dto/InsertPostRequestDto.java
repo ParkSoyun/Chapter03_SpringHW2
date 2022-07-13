@@ -8,13 +8,14 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
 @Getter
-public class RequestPostDto {
+public class InsertPostRequestDto {
     private String title;
     private String writer;
     private String password;
     private String content;
 
-    public RequestPostDto(String title, String writer, String password, String content) {
+    public InsertPostRequestDto(String title, String writer, String password, String content)
+    {
         this.title = title;
         this.writer = writer;
         this.password = password;

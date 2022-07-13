@@ -1,12 +1,10 @@
 package com.sparta.springhw1.controller;
 
 import com.sparta.springhw1.domain.Post;
-import com.sparta.springhw1.dto.RequestPostDto;
-import com.sparta.springhw1.dto.UpdateRequestPostDto;
+import com.sparta.springhw1.dto.InsertPostRequestDto;
+import com.sparta.springhw1.dto.UpdatePostRequestDto;
 import com.sparta.springhw1.service.PostService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 public class PostController {
-
     private final PostService postService;
 
     @GetMapping("/")
@@ -38,8 +35,8 @@ public class PostController {
     }
 
     @PostMapping("/posts/write")
-    public String savePost(RequestPostDto requestPostDto) {
-        Long id = postService.savePost(requestPostDto);
+    public String savePost(InsertPostRequestDto insertPostRequestDto) {
+        Long id = postService.savePost(insertPostRequestDto);
 
         return "redirect:/posts/" + id;
     }
@@ -70,7 +67,8 @@ public class PostController {
     }
 
     @PatchMapping("/posts/{id}")
-    public String modifyPost(@PathVariable("id") Long id, UpdateRequestPostDto updateRequestPostDto, Model model) {
+    public String modifyPost(@PathVariable("id") Long id, UpdatePostRequestDto updateRequestPostDto, Model model) {
+        System.out.println(updateRequestPostDto.getContent());
         postService.modifyPost(id, updateRequestPostDto);
 
         Post post = postService.getPost(id);
