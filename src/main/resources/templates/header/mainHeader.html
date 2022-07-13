@@ -12,7 +12,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
-    <link th:href="@{/css/header-style.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/header/header-style.css}" rel="stylesheet" type="text/css">
     <!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
@@ -21,14 +21,25 @@
 <body>
     <div class="main-header">
         <div class="background-main-header"></div>
+
         <div class="main-header ">
+<!--        <div class="user-box">-->
+<!--            <button type="button" class="btn btn-outline-light">회원가입</button>-->
+<!--            <button type="button" class="btn btn-outline-light">로그인</button>-->
+<!--        </div>-->
+
             <a th:href="@{/posts}">
-<!--                <h1 th:onclick="|location.href='@{/posts}'|">HangHae.Log</h1>-->
                     <h1>HangHae.Log</h1>
             </a>
+
             <h5>
                 나만의 항해 블로그
             </h5>
+
+            <div class="user-box">
+                <button type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signup}'|">회원가입</button>
+                <button type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signin}'|">로그인</button>
+            </div>
         </div>
     </div>
 
