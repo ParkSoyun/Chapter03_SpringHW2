@@ -1,5 +1,6 @@
 package com.sparta.springhw1.dto;
 
+import com.sparta.springhw1.domain.UserEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,15 +11,11 @@ import java.time.LocalDateTime;
 @Getter
 public class InsertPostRequestDto {
     private String title;
-    private String writer;
-    private String password;
     private String content;
 
-    public InsertPostRequestDto(String title, String writer, String password, String content)
+    public InsertPostRequestDto(String title, String content)
     {
         this.title = title;
-        this.writer = writer;
-        this.password = password;
         this.content = content;
     }
 }
