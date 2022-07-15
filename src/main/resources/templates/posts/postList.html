@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,7 +29,7 @@
 
     <div class="wrap">
         <div class="new-post-btn">
-            <button type="button" class="btn btn-outline-info" th:onclick="|location.href='@{/posts/write}'|">+ New Post</button>
+            <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-info" th:onclick="|location.href='@{/posts/write}'|">+ New Post</button>
         </div>
 
         <table class="table table-hover post-list">
@@ -47,7 +47,7 @@
                     <th class="post-title">
                         <a th:text="${post.title}" th:href="@{/posts/{id}(id=${post.postId})}"></a>
                     </th>
-                    <td class="post-writer-tb" th:text="${post.writer}"></td>
+                    <td class="post-writer-tb" th:text="${post.user?.userId}"></td>
                     <td class="post-create-date-tb" th:text="${post.createdAt}"></td>
                 </tr>
             </tbody>

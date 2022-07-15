@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,11 +23,6 @@
         <div class="background-main-header"></div>
 
         <div class="main-header ">
-<!--        <div class="user-box">-->
-<!--            <button type="button" class="btn btn-outline-light">회원가입</button>-->
-<!--            <button type="button" class="btn btn-outline-light">로그인</button>-->
-<!--        </div>-->
-
             <a th:href="@{/posts}">
                     <h1>HangHae.Log</h1>
             </a>
@@ -37,8 +32,11 @@
             </h5>
 
             <div class="user-box">
-                <button type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signup}'|">회원가입</button>
-                <button type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signin}'|">로그인</button>
+                <button sec:authorize="isAnonymous()" type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signup}'|">회원가입</button>
+                <button sec:authorize="isAnonymous()" type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signin}'|">로그인</button>
+
+<!--                <span sec:authorize="isAuthenticated()" class="user-info" th:text="|${user?.username}님 환영합니다.&nbsp&nbsp|"></span>-->
+                <button sec:authorize="isAuthenticated()" type="button" class="btn btn-outline-light" th:onclick="|location.href='@{/users/signout}'|">로그아웃</button>
             </div>
         </div>
     </div>

@@ -13,6 +13,7 @@
 
     <link th:href="@{/css/posts/post-style.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/post.js}" type="text/javascript"></script>
+    <script th:src="@{/js/comment.js}" type="text/javascript"></script>
     <!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
@@ -33,90 +34,79 @@
     </script>
 </head>
 <body>
-<div class="background-body"></div>
+    <div class="background-body"></div>
 
-<div th:include="header/subHeader.html"></div>
+    <div th:include="header/subHeader.html"></div>
 
 
-<div class="wrap">
-    <form th:action="@{/posts/{id}(id=${post.postId})}" method="POST">
-<!--    <form th:action="@{/posts/${post.postId}}" method="post">-->
-        <div class="save-post-btn">
-            <button type="button" class="btn btn-outline-info" id="buttonModify" th:onclick="openPasswordFormModify()">수정</button>
-            <button type="submit" class="btn btn-outline-info" id="buttonCheckPasswordModify" hidden>비밀번호 확인</button>
-            <button type="button" class="btn btn-outline-danger" id="buttonDelete" th:onclick="openPasswordFormDelete()">삭제</button>
-            <button type="button" class="btn btn-outline-danger" id="buttonCheckPasswordDelete" th:onclick="|checkPasswordAndDelete(${post.postId})|" hidden>비밀번호 확인</button>
-        </div>
-
-        <div>
-            <div class="col row created-at">
-                <label for="inputCreatedAt" class="col col-4 col-form-label">작성 시간</label>
-                <div class="col">
-                    <input disabled type="text" name="createdAt" class="form-control" id="inputCreatedAt" th:value="${post.createdAt}">
-                </div>
+    <div class="wrap">
+        <form th:action="@{/posts/{id}(id=${post.postId})}" method="post">
+            <div class="save-post-btn">
+                <button th:if="${user?.userId} == ${post.user?.userId}" type="submit" class="btn btn-outline-info" id="buttonModify">수정</button>
+                <button th:if="${user?.userId} == ${post.user?.userId}" type="button" class="btn btn-outline-danger" id="buttonDelete" th:onclick="|deletePost(${post.postId})|">삭제</button>
             </div>
 
-            <input readonly class="form-control form-control-lg" type="text" name="title" th:value="${post.title}">
-
-            <div class="writer-password">
-                <div class="col row writer">
-                    <label for="inputWriter" class="col col-3 col-form-label">작성자</label>
-                    <div class="col">
-                        <input readonly type="text" name="writer" class="form-control" id="inputWriter" th:value="${post.writer}">
-                    </div>
-                </div>
-                <div class="col row password">
-                    <label for="inputPassword" class="col col-3 col-form-label">비밀번호</label>
-                    <div class="col">
-                        <input readonly type="password" name="password" class="form-control" id="inputPassword" required>
-                    </div>
-                </div>
+            <div>
+                <table class="table table-light">
+                    <tbody>
+                        <tr>
+                            <th colspan="4" class="post-title" th:text="${post.title}"></th>
+                        </tr>
+                        <tr>
+                            <th class="post-image"><img src="../images/writer.png" height="20px"></th>
+                            <td class="post-writer" th:text="${post.user?.userId}"></td>
+                            <th class="post-image"><img src="../images/createDate.png" height="20px"></th>
+                            <td class="post-create-date" th:text="${post.createdAt}"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" class="post-content" th:utext="${post.content}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </form>
 
-            <div class="mb-3">
-                <textarea readonly name="content" class="form-control content " id="exampleFormControlTextarea1" th:text="${post.content}" rows="10"></textarea>
+        <br>
+        <hr>
+        <br>
+
+        <form th:if="${user?.userId} != null" th:action="@{/comments/{postId}(postId=${post.postId})}" method="POST">
+            <div class="comment-box">
+                <div class="form-floating mb-3 comment-input-div">
+                    <textarea class="form-control comment-input" id="content" name="content" placeholder="댓글을 입력해주세요." style="height: 80px;" required></textarea>
+                    <label for="content">댓글</label>
+                </div>
+
+                <button type="submit" class="btn btn-light comment-save-btn" >등록</button>
             </div>
-
+            <br>
             <hr>
+            <br>
+        </form>
 
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>좋은 정보 감사합니다^^</td>
-                    </tr>
-                </tbody>
-                <thead>
+
+        <table th:each="comment : ${comments}" class="table">
+            <tbody>
                 <tr>
-                    <th scope="col">소윤맘</th>
+                    <th scope="col" th:text="${comment.user.userId}"></th>
+                    <td class="comment-btn">
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-info" id="openModifyCommentForm" th:onclick="|openModifyCommentForm()|">수정</button>
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-info" id="buttonCommentModify" th:onclick="|modifyComment(${comment.commentId})|" hidden>수정</button>
+                    </td>
+                    <td class="comment-btn">
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-danger" id="buttonCommentDelete" th:onclick="|deleteComment(${comment.commentId})|">삭제</button>
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-secondary" id="closeModifyCommentForm" th:onclick="|closeModifyCommentForm()|" hidden>취소</button>
+                    </td>
                 </tr>
-                </thead>
-            </table>
-            <table class="table">
-                <tbody>
                 <tr>
-                    <td>좋은 정보 감사합니다^^</td>
+                    <td colspan="3" class="comment-content-td" id="commentContent" th:utext="${comment.content}">
+                        <div id="commentContentTextarea" hidden>
+                            <textarea class="form-control" name="commentContent" th:text="${comment.content}" placeholder="댓글을 입력해주세요." required></textarea>
+                        </div>
+                    </td>
                 </tr>
-                </tbody>
-                <thead>
-                <tr>
-                    <th scope="col">소윤맘</th>
-                </tr>
-                </thead>
-            </table>
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td>좋은 정보 감사합니다^^</td>
-                </tr>
-                </tbody>
-                <thead>
-                <tr>
-                    <th scope="col">소윤맘</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-    </form>
-</div>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

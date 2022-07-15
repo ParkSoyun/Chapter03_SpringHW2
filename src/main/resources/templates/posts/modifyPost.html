@@ -33,21 +33,6 @@
             <div>
                 <input class="form-control form-control-lg" type="text" name="title" th:value="${post.title}" required>
 
-                <div class="writer-password">
-                    <div class="col row writer">
-                        <label for="inputWriter" class="col col-3 col-form-label">작성자</label>
-                        <div class="col">
-                            <input disabled type="text" name="writer" class="form-control" id="inputWriter" th:value="${post.writer}">
-                        </div>
-                    </div>
-                    <div class="col row password">
-                        <label for="inputPassword" class="col col-3 col-form-label">비밀번호</label>
-                        <div class="col">
-                            <input disabled type="password" name="password" class="form-control" id="inputPassword">
-                        </div>
-                    </div>
-                </div>
-
                 <div class="mb-3">
                     <textarea name="content" class="form-control content " id="exampleFormControlTextarea1" th:text="${post.content}" rows="10" required></textarea>
                 </div>
