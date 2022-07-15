@@ -30,12 +30,11 @@ public class CommentService {
         return postId;
     }
 
-    public Long saveComment(Post post, UserDetailsImpl user, InsertCommentRequestDto insertCommentRequestDto) {
+    public void saveComment(Post post, UserDetailsImpl user, InsertCommentRequestDto insertCommentRequestDto) {
         Comment comment = new Comment(post, user, insertCommentRequestDto);
 
         commentRepository.save(comment);
 
-        return comment.getCommentId();
     }
 
     public void modifyComment(Long commentId, UpdateCommentRequestDto updateCommentRequestDto) {
