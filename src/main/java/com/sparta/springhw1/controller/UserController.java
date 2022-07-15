@@ -43,7 +43,7 @@ public class UserController {
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
 
-            return "users/signup";
+            return "users/signUp";
         }
 
         return "users/signIn";
