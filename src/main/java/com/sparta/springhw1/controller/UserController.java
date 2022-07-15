@@ -4,7 +4,6 @@ import com.sparta.springhw1.dto.InsertUserRequestDto;
 import com.sparta.springhw1.form.InsertUserForm;
 import com.sparta.springhw1.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,17 +53,6 @@ public class UserController {
     public String signInForm() {
         return "users/signIn";
     }
-
-//    @PostMapping("/signin")
-//    public String signIn(SelectUserRequestDto selectUserRequestDto) {
-//        boolean result = userService.signIn(selectUserRequestDto);
-//
-//        if(result) {
-//            return "posts/postList";
-//        } else {
-//            return "users/signIn";
-//        }
-//    }
 
     @GetMapping("/signin/error")
     public String signInError(Model model) {

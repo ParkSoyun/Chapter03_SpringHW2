@@ -4,21 +4,17 @@ import com.sparta.springhw1.domain.UserEntity;
 import com.sparta.springhw1.dto.InsertUserRequestDto;
 import com.sparta.springhw1.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
+import java.util.regex.Pattern;
 
 
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class UserService implements UserDetailsService {
+public class UserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -34,11 +30,11 @@ public class UserService implements UserDetailsService {
         }
     }
 
-//    private boolean checkIdForm(String userId) {
-//        String idPattern = "^[a-z|A-Z|0-9]*$";
-//
-//        return userId.length() >= 3 && Pattern.matches(idPattern, userId);
-//    }
+    private boolean checkIdForm(String userId) {
+        String idPattern = "^[a-z|A-Z|0-9]*$";
+
+        return userId.length() >= 3 && Pattern.matches(idPattern, userId);
+    }
 
     private boolean checkPwForm(String userId, String password) {
         return password.length() >= 4 && !password.contains(userId);
@@ -55,9 +51,9 @@ public class UserService implements UserDetailsService {
             throw new IllegalStateException("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
         }
 
-//        if(!checkIdForm(userId)) {
-//            throw new IllegalStateException("아이디 형식을 다시 확인해 주세요.");
-//        }
+        if(!checkIdForm(userId)) {
+            throw new IllegalStateException("아이디 형식을 다시 확인해 주세요.");
+        }
 
         if(!checkPwForm(userId, password)) {
             throw new IllegalStateException("비밀번호는 아이디와 같은 값이 포함되지 않아야 합니다.");
@@ -68,35 +64,4 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
 
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-        System.out.println(id);
-        UserEntity user = userRepository.findById(id).get();
-
-        if(user == null) {
-            throw new UsernameNotFoundException(id);
-        }
-
-        System.out.println("로그인 성공");
-
-        return User.builder()
-                .username(user.getName())
-                .password(user.getPassword())
-                .authorities(Collections.emptyList())
-                .build();
-    }
-
-//    public boolean signIn(SelectUserRequestDto selectUserRequestDto) {
-//        String id = selectUserRequestDto.getId();
-//        String password = passwordEncoder.encode(selectUserRequestDto.getPassword());
-//
-//        UserEntity user = userRepository.findById(id).get();
-//
-//        if(user.getPassword().equals(password)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
 }
