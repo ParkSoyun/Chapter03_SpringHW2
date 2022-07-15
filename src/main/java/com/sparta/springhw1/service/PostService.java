@@ -37,13 +37,26 @@ public class PostService {
         return post.getPostId();
     }
 
-    public void modifyPost(Long id, UpdatePostRequestDto updateRequestPostDto) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+    public boolean isWriter(Long postId, UserDetailsImpl user) {
+        Post post = postRepository.findById(postId).get();
 
-        post.update(updateRequestPostDto);
+        String currentUser = user.getUserId();
+        String writer = post.getUser().getUserId();
+
+        return currentUser.equals(writer);
     }
 
-    public void deletePost(Long id) {
-        postRepository.deleteById(id);
+    public void modifyPost(Long postId, UserDetailsImpl user, UpdatePostRequestDto updateRequestPostDto) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+
+        if(isWriter(postId, user)) {
+            post.update(updateRequestPostDto);
+        }
+    }
+
+    public void deletePost(Long postId, UserDetailsImpl user) {
+        if(isWriter(postId, user)) {
+            postRepository.deleteById(postId);
+        }
     }
 }

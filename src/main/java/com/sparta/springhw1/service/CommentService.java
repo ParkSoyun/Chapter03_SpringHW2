@@ -37,13 +37,26 @@ public class CommentService {
 
     }
 
-    public void modifyComment(Long commentId, UpdateCommentRequestDto updateCommentRequestDto) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+    public boolean isWriter(Long commentId, UserDetailsImpl user) {
+        Comment comment = commentRepository.findById(commentId).get();
 
-        comment.update(updateCommentRequestDto);
+        String currentUser = user.getUserId();
+        String writer = comment.getUser().getUserId();
+
+        return currentUser.equals(writer);
     }
 
-    public void deleteComment(Long commentId) {
-        commentRepository.deleteById(commentId);
+    public void modifyComment(Long commentId, UserDetailsImpl user, UpdateCommentRequestDto updateCommentRequestDto) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
+
+        if(isWriter(commentId, user)) {
+            comment.update(updateCommentRequestDto);
+        }
+    }
+
+    public void deleteComment(Long commentId, UserDetailsImpl user) {
+        if(isWriter(commentId, user)) {
+            commentRepository.deleteById(commentId);
+        }
     }
 }

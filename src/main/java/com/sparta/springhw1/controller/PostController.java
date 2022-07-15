@@ -64,8 +64,8 @@ public class PostController {
     }
 
     @PatchMapping("/posts/{id}")
-    public String modifyPost(@PathVariable("id") Long id, UpdatePostRequestDto updateRequestPostDto, Model model) {
-        postService.modifyPost(id, updateRequestPostDto);
+    public String modifyPost(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable("id") Long id, UpdatePostRequestDto updateRequestPostDto, Model model) {
+        postService.modifyPost(id, user, updateRequestPostDto);
 
         Post post = postService.getPost(id);
         model.addAttribute("post", post);
@@ -75,8 +75,8 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     @ResponseBody
-    public Long deletePost(@PathVariable("id") Long id) {
-        postService.deletePost(id);
+    public Long deletePost(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable("id") Long id) {
+        postService.deletePost(id, user);
 
         return id;
     }

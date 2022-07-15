@@ -29,18 +29,16 @@ public class CommentController {
 
     @PatchMapping("/comments/{commentId}")
     @ResponseBody
-    public Long modifyComment(@PathVariable("commentId") Long commentId, @RequestBody UpdateCommentRequestDto updateCommentRequestDto) {
-        commentService.modifyComment(commentId, updateCommentRequestDto);
+    public Long modifyComment(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable("commentId") Long commentId, @RequestBody UpdateCommentRequestDto updateCommentRequestDto) {
+        commentService.modifyComment(commentId, user, updateCommentRequestDto);
 
         return commentId;
     }
 
     @DeleteMapping("/comments/{commentId}")
     @ResponseBody
-    public Long deleteComment(@PathVariable("commentId") Long commentId) {
-        Long postId = commentService.getPostId(commentId);
-
-        commentService.deleteComment(commentId);
+    public Long deleteComment(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable("commentId") Long commentId) {
+        commentService.deleteComment(commentId, user);
 
         return commentId;
     }
