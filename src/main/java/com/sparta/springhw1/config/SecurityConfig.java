@@ -1,5 +1,7 @@
 package com.sparta.springhw1.config;
 
+import com.sparta.springhw1.security.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,16 +10,19 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+//@EnableGlobalMethodSecurity(securedEnabled = true)
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
-                .loginPage("/users/signIn")
+                .loginPage("/users/signin")
                 .loginProcessingUrl("/users/signin")
                 .defaultSuccessUrl("/")
                 .usernameParameter("id")
@@ -28,10 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
 
         http.authorizeRequests()
-                .mvcMatchers("/", "/users/**", "/posts/**").permitAll()
+                .mvcMatchers("/", "/users/**", "/posts", "/posts/{id}").permitAll()
                 .anyRequest().authenticated();
 
-        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+//        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
+        http.csrf().ignoringAntMatchers("/posts/**", "/comments/**");
+
+        http.userDetailsService(userDetailsServiceImpl);
     }
 
     @Bean
