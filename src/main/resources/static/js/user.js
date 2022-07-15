@@ -1,18 +1,3 @@
-// (function() {
-//     "use strict";
-//     window.addEventListener("load", function() {
-//         var form = document.getElementById("needs-validation");
-//
-//         form.addEventListener("button", function(event) {
-//             if (!form.checkValidity()) {
-//                 event.preventDefault();
-//                 event.stopPropagation();
-//             }
-//                 form.classList.add("was-validated");
-//
-//         }, false);
-//     }, false);
-// }());
 
 function checkExistId(id) {
     $.ajax({
