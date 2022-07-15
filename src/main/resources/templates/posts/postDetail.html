@@ -90,19 +90,20 @@
                 <tr>
                     <th scope="col" th:text="${comment.user.userId}"></th>
                     <td class="comment-btn">
-                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-info" id="openModifyCommentForm" th:onclick="|openModifyCommentForm()|">수정</button>
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-info" id="openModifyCommentForm" onclick="openModifyCommentForm()">수정</button>
                         <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-info" id="buttonCommentModify" th:onclick="|modifyComment(${comment.commentId})|" hidden>수정</button>
                     </td>
                     <td class="comment-btn">
                         <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-danger" id="buttonCommentDelete" th:onclick="|deleteComment(${comment.commentId})|">삭제</button>
-                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-secondary" id="closeModifyCommentForm" th:onclick="|closeModifyCommentForm()|" hidden>취소</button>
+                        <button th:if="${user?.userId} == ${comment.user?.userId}" type="button" class="btn btn-outline-secondary" id="closeModifyCommentForm" onclick="closeModifyCommentForm()" hidden>취소</button>
                     </td>
                 </tr>
-                <tr>
-                    <td colspan="3" class="comment-content-td" id="commentContent" th:utext="${comment.content}">
-                        <div id="commentContentTextarea" hidden>
-                            <textarea class="form-control" name="commentContent" th:text="${comment.content}" placeholder="댓글을 입력해주세요." required></textarea>
-                        </div>
+                <tr id="commentContent">
+                    <td colspan="3" class="comment-content-td" th:utext="${comment.content}"></td>
+                </tr>
+                <tr id="modifyCommentContentTr" hidden>
+                    <td colspan="3" class="comment-content-td" >
+                        <textarea class="form-control comment-input" id="modifyCommentContent" th:text="${comment.content}" placeholder="댓글을 입력해주세요." style="height: 80px;" required></textarea>
                     </td>
                 </tr>
             </tbody>

@@ -3,7 +3,7 @@ function deletePost(id) {
         type: "DELETE",
         url: "/posts/" + id,
         success: function (response) {
-            alert("삭제가 완료되었습니다.");
+            alert("게시글 삭제가 완료되었습니다.");
 
             location.href="/posts"
         }
