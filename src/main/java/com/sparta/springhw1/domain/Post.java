@@ -2,9 +2,11 @@ package com.sparta.springhw1.domain;
 
 import com.sparta.springhw1.dto.InsertPostRequestDto;
 import com.sparta.springhw1.dto.UpdatePostRequestDto;
+import com.sparta.springhw1.security.UserDetailsImpl;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 
@@ -23,11 +25,9 @@ public class Post extends Timestamped{
     @Column(length = 31, nullable = false)
     private String title;
 
-    @Column(name = "user_id_fk", length = 15, nullable = false)
-//    @Column(nullable = false)
-    private String writer;
-
-    private String password;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
@@ -37,11 +37,10 @@ public class Post extends Timestamped{
         this.content = content;
     }
 
-    public Post(InsertPostRequestDto postDto) {
-        this.title = postDto.getTitle();
-        this.writer = postDto.getWriter();
-        this.password = postDto.getPassword();
-        this.content = postDto.getContent();
+    public Post(InsertPostRequestDto insertPostRequestDto, UserDetailsImpl user) {
+        this.title = insertPostRequestDto.getTitle();
+        this.user = user.getUser();
+        this.content = insertPostRequestDto.getContent();
     }
 
     public void update(UpdatePostRequestDto updateRequestPostDto) {

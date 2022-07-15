@@ -1,5 +1,8 @@
 package com.sparta.springhw1.domain;
 
+import com.sparta.springhw1.dto.InsertCommentRequestDto;
+import com.sparta.springhw1.dto.UpdateCommentRequestDto;
+import com.sparta.springhw1.security.UserDetailsImpl;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,12 +19,24 @@ public class Comment extends Timestamped{
     @Column(name = "comment_id")
     private Long commentId;
 
-    @Column(name = "post_id_fk", nullable = false)
-    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @Column(name = "user_id_fk", length = 15, nullable = false)
-    private String writer;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
+
+    public Comment(Post post, UserDetailsImpl user, InsertCommentRequestDto insertCommentRequestDto) {
+        this.post = post;
+        this.user = user.getUser();
+        this.content = insertCommentRequestDto.getContent();
+    }
+
+    public void update(UpdateCommentRequestDto updateCommentRequestDto) {
+        this.content = updateCommentRequestDto.getContent();
+    }
 }
