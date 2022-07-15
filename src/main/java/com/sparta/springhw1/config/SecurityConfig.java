@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 //@EnableGlobalMethodSecurity(securedEnabled = true)
@@ -36,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/", "/users/**", "/posts", "/posts/{id}").permitAll()
                 .anyRequest().authenticated();
 
-//        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
-        http.csrf().ignoringAntMatchers("/posts/**", "/comments/**");
+        http.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository())
+                .ignoringAntMatchers("/posts/**", "/comments/**");
 
         http.userDetailsService(userDetailsServiceImpl);
     }
