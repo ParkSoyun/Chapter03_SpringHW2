@@ -18,20 +18,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
     <title>HangHae.Log</title>
-
-    <script th:inline="javascript">
-        $(document).ready(function () {
-            let result = [[${result}]];
-
-            console.log(result);
-
-            if(result != null) {
-                alert(result);
-
-                location.href= "[[${post.postId}]]";
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="background-body"></div>
