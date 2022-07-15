@@ -22,11 +22,6 @@ public class PostController {
     private final PostService postService;
     private final CommentService commentService;
 
-    @GetMapping("/")
-    public String index() {
-        return "redirect:/posts";
-    }
-
     @GetMapping("/posts")
     public String postList(Model model) {
         List<Post> posts = postService.getPostList();
