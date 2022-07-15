@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +16,11 @@
             crossorigin="anonymous"></script>
 
     <link th:href="@{/css/users/user-style.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/user.js}" type="text/javascript"></script>
     <!--    <link href="../../static/css/post-list-style.css" rel="stylesheet" type="text/css">-->
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Prompt:wght@900&display=swap" rel="stylesheet">
 
     <title>HangHae.Log</title>
@@ -53,8 +57,9 @@
             </a>
         </div>
 
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     </form>
+
 </div>
 </body>
 </html>
