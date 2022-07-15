@@ -1,10 +1,15 @@
 package com.sparta.springhw1.controller;
 
+import com.sparta.springhw1.domain.Comment;
 import com.sparta.springhw1.domain.Post;
 import com.sparta.springhw1.dto.InsertPostRequestDto;
 import com.sparta.springhw1.dto.UpdatePostRequestDto;
+import com.sparta.springhw1.security.UserDetailsImpl;
+import com.sparta.springhw1.service.CommentService;
 import com.sparta.springhw1.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +20,7 @@ import java.util.List;
 @Controller
 public class PostController {
     private final PostService postService;
+    private final CommentService commentService;
 
     @GetMapping("/")
     public String index() {
@@ -35,40 +41,35 @@ public class PostController {
     }
 
     @PostMapping("/posts/write")
-    public String savePost(InsertPostRequestDto insertPostRequestDto) {
-        Long id = postService.savePost(insertPostRequestDto);
+    public String savePost(@AuthenticationPrincipal UserDetailsImpl user, InsertPostRequestDto insertPostRequestDto) {
+        Long id = postService.savePost(insertPostRequestDto, user);
 
         return "redirect:/posts/" + id;
     }
 
     @GetMapping("/posts/{id}")
-    public String detailForm(@PathVariable("id") Long id, Model model) {
+    public String detailForm(@AuthenticationPrincipal UserDetailsImpl user, @PathVariable("id") Long id, Model model) {
         Post post = postService.getPost(id);
+        List<Comment> comments = commentService.getCommentList(post);
+
+        model.addAttribute("user", user);
         model.addAttribute("post", post);
+        model.addAttribute("comments", comments);
 
         return "posts/postDetail";
     }
 
     @PostMapping("/posts/{id}")
-    public String checkPassword(@PathVariable("id") Long id, @RequestParam(value = "password") String inputPassword, Model model) {
+    public String modifyPostForm(@PathVariable("id") Long id, Model model) {
         Post post = postService.getPost(id);
-
-        boolean checkPassword = postService.checkPassword(inputPassword, post);
 
         model.addAttribute("post", post);
 
-        if(checkPassword) {
-            return "posts/modifyPost";
-        } else {
-            model.addAttribute("result", "비밀번호가 틀렸습니다.");
-
-            return "posts/postDetail";
-        }
+        return "posts/modifyPost";
     }
 
     @PatchMapping("/posts/{id}")
     public String modifyPost(@PathVariable("id") Long id, UpdatePostRequestDto updateRequestPostDto, Model model) {
-        System.out.println(updateRequestPostDto.getContent());
         postService.modifyPost(id, updateRequestPostDto);
 
         Post post = postService.getPost(id);
@@ -79,17 +80,9 @@ public class PostController {
 
     @DeleteMapping("/posts/{id}")
     @ResponseBody
-    public Long deletePost(@PathVariable("id") Long id, @RequestParam(value = "password") String inputPassword) {
-        Post post = postService.getPost(id);
+    public Long deletePost(@PathVariable("id") Long id) {
+        postService.deletePost(id);
 
-        boolean checkPassword = postService.checkPassword(inputPassword, post);
-
-        if(checkPassword) {
-            postService.deletePost(id);
-
-            return id;
-        } else {
-            return 0L;
-        }
+        return id;
     }
 }

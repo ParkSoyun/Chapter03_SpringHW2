@@ -4,6 +4,7 @@ import com.sparta.springhw1.domain.Post;
 import com.sparta.springhw1.dto.InsertPostRequestDto;
 import com.sparta.springhw1.dto.UpdatePostRequestDto;
 import com.sparta.springhw1.repository.PostRepository;
+import com.sparta.springhw1.security.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,22 +29,12 @@ public class PostService {
         return post;
     }
 
-    public Long savePost(InsertPostRequestDto insertPostRequestDto) {
-        Post post = new Post(insertPostRequestDto);
+    public Long savePost(InsertPostRequestDto insertPostRequestDto, UserDetailsImpl user) {
+        Post post = new Post(insertPostRequestDto, user);
 
         postRepository.saveAndFlush(post);
 
         return post.getPostId();
-    }
-
-    public boolean checkPassword(String inputPassword, Post post) {
-        String password = post.getPassword();
-
-        if(password.equals(inputPassword)) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void modifyPost(Long id, UpdatePostRequestDto updateRequestPostDto) {
