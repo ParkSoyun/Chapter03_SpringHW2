@@ -16,7 +16,7 @@
 
     width: 700px;
     margin: 0px auto;
-    padding-top: 200px;
+    padding-top: 180px;
 }
 
 .save-post-btn {
@@ -25,31 +25,73 @@
     margin-bottom: 10px;
 }
 
-.created-at {
-    float: left;
-
-    padding-top: 10px;
-}
-
-.writer-password {
-    display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: center;
-
-    margin-top: 10px;
-}
-
-.writer {
-    padding-right: 10px;
-}
-
-.password {
-    padding-left: 10px;
-}
-
 .content {
     margin-top: 10px;
 
     resize: none;
+}
+
+.post-title {
+    font-size: 30px;
+}
+
+.post-image {
+    width: 6%;
+}
+
+.post-writer {
+    width: 42%;
+
+    vertical-align: center;
+}
+
+.post-create-date {
+    width: 42%;
+
+    vertical-align: center;
+}
+
+.post-content {
+    font-size: 20px;
+
+    white-space: pre;
+}
+
+.comment-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    vertical-align: middle;
+    justify-content: space-between;
+}
+
+.comment-input-div {
+    flex: 7;
+
+    margin-right: 10px;
+}
+
+.comment-input {
+    resize: none;
+}
+
+.comment-save-btn {
+    flex: 1;
+    display: inline-flex;
+    height: 80px;
+
+    margin-left: 10px;
+}
+
+.comment-btn {
+    width: 11%;
+
+    text-align: center;
+}
+
+.comment-content-td {
+    white-space: pre;
+
+    border-bottom: 1px solid dimgrey;
 }
