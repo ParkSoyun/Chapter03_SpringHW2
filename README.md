@@ -89,10 +89,7 @@
     - Ubuntu EC2 를 구매한 뒤, 8080 포트와 80번 포트를 연결하여 포트 번호 없이도 서비스에 접속 가능하게 하기
 
 ## 📌 API 설계
-![image](https://user-images.githubusercontent.com/50862493/178103344-5e005860-d282-41bc-ad81-b842332e1d6f.png)
+![image](https://user-images.githubusercontent.com/50862493/179264137-53c37376-ee42-4b6a-be88-25b5ddcc3c64.png)
 
 ## 📌 데이터베이스 설계
-![image](https://user-images.githubusercontent.com/50862493/178103386-4c6301dc-7c9c-469b-8932-03d677b94d3a.png)
-![image](https://user-images.githubusercontent.com/50862493/178103404-8aebfc9d-1a27-45a5-9544-109ba7236d5e.png)
-![image](https://user-images.githubusercontent.com/50862493/178103420-5438e933-315f-4182-a9da-8ea01891b880.png)
-
+![image](https://user-images.githubusercontent.com/50862493/179264338-7869920b-9e15-4c9c-9423-f4bf03f0eef4.png)
