@@ -3,7 +3,7 @@
 - [Spring 숙련 주차 개인 과제](https://www.notion.so/Spring-d2861c039b7d4c9fa6ff3a1da98af9a7)
 
 ## 📌 결과물 링크
-- http://sparta-psy.shop/posts
+- ~~http:<hihi>//sparta-psy.shop/posts~~
 
 ## 📌 목표
 ```
